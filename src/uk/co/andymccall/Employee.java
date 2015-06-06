@@ -27,14 +27,25 @@ public abstract class Employee implements Employed {
     public void setName(String name) { this.name = name; }
 
     public int getContract() { return contract; }
-    public void setContract(int contract) { this.contract = contract; }
+    public void setContract(int contract) {
+        if ((contract < 0) || (contract > 2)) {
+            throw new IllegalArgumentException("Invalid contract: " + contract);
+        }
+        this.contract = contract;
+    }
 
     public int getYears() { return years; }
-    public void setYears(int years) { this.years = years; }
+    public void setYears(int years) {
+        if (years < 0) {
+            throw new IllegalArgumentException("Invalid number of years: " + years);
+        }
+        this.years = years;
+    }
 
     public String getDepartment() { return department; }
     public void setDepartment(String department) { this.department = department; }
 
+    @Override
     public String toString() {
 
         String generatedString="";
@@ -62,5 +73,6 @@ public abstract class Employee implements Employed {
 
     }
 
+    @Override
     public abstract double getSalary();
 }
