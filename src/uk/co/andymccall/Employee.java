@@ -1,8 +1,11 @@
 package uk.co.andymccall;
 
 /**
- * Created by Andy on 05/06/2015.
+ * @author  Andy McCall
+ * @version 1.0
+ * @since   2015-06-06
  */
+
 public abstract class Employee implements Employed {
 
     final public static int TEMPORARY=0;
@@ -24,10 +27,18 @@ public abstract class Employee implements Employed {
     }
 
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        // Check if the name only contains whitespace or is empty
+        // everything else is valid
+        if (name.trim().length() == 0) {
+            throw new IllegalArgumentException("Invalid name: " + name);
+        }
+        this.name = name;
+    }
 
     public int getContract() { return contract; }
     public void setContract(int contract) {
+        // Check if the contract is one of our constants
         if ((contract < 0) || (contract > 2)) {
             throw new IllegalArgumentException("Invalid contract: " + contract);
         }
@@ -43,7 +54,14 @@ public abstract class Employee implements Employed {
     }
 
     public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
+    public void setDepartment(String department) {
+        // Check if the department only contains whitespace or is empty
+        // everything else is valid
+        if (department.trim().length() == 0) {
+            throw new IllegalArgumentException("Invalid department: " + department);
+        }
+        this.department = department;
+    }
 
     @Override
     public String toString() {
@@ -53,15 +71,16 @@ public abstract class Employee implements Employed {
         generatedString += getName();
         generatedString += ": ";
         generatedString += getDepartment() + " department, ";
+        // Switch on getContract and substitute contract text
         switch (getContract()) {
             case TEMPORARY:
-                generatedString += "TEMPORARY contract, ";
+                generatedString += "temporary contract, ";
                 break;
             case TRAINING:
-                generatedString += "TRAINING contract, ";
+                generatedString += "training contract, ";
                 break;
             case INDEFINITE:
-                generatedString += "INDEFINITE contract, ";
+                generatedString += "indefinite contract, ";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid contract: " + getContract());

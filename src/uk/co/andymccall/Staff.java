@@ -1,8 +1,11 @@
 package uk.co.andymccall;
 
 /**
- * Created by Andy on 05/06/2015.
+ * @author  Andy McCall
+ * @version 1.0
+ * @since   2015-06-06
  */
+
 public class Staff {
     
     public Staff()
