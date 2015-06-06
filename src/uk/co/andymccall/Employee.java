@@ -42,7 +42,19 @@ public abstract class Employee implements Employed {
         generatedString += getName();
         generatedString += ": ";
         generatedString += getDepartment() + " department, ";
-        generatedString += getContract() + " contract, ";
+        switch (getContract()) {
+            case TEMPORARY:
+                generatedString += "TEMPORARY contract, ";
+                break;
+            case TRAINING:
+                generatedString += "TRAINING contract, ";
+                break;
+            case INDEFINITE:
+                generatedString += "INDEFINITE contract, ";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid contract: " + getContract());
+        }
         generatedString += getYears() + " years in the company, ";
         generatedString += "salary of " + getSalary() + " bitcoins";
 
